@@ -1,0 +1,55 @@
+<?php
+/**@var Magenest\Staff\Block\Staff\Dashboard\Info $block*/
+?>
+<table width="100%">
+    <tr><p><strong>Profile Status</strong></p></tr>
+    <tr><h2><a href="#">Waiting for Admin to confirm</a></h2></tr>
+    <tr><p><strong>Staff type</strong></p></tr>
+    <tr>
+        <p>
+            <select id="type" name="type" form="type">
+                <?php $type = $block->getType(); ?>
+                <option value="1" <?php if($type == 1){ echo 'selected';}?>>lv1</option>
+                <option value="2" <?php if ($type == 2){ echo 'selected'; }?>>lv2</option>
+                <option value="3" <?php if ($type == 3){ echo 'selected'; }?>>others</option>
+            </select>
+        </p>
+    </tr>
+    <tr><p><strong>Nick Name</strong></p></tr>
+    <tr><p><input type="text" name="name" id="name" value="<?= $block->getName()?>"></p></tr>
+    <tr>
+        <button type="button" class="save_staff" id="save">Save</button>
+    </tr>
+</table>
+
+<script>
+    require(['jquery','Magento_Ui/js/modal/alert'], function ($,alert) {
+        $(document).on("click", "#save", function () {
+            var type = $('select[name=type]').val();
+            var name = $('#name').val();
+            $.ajax({
+                type:'POST',
+                url: '<?= $block->getUpdateUrl()?>',
+                showLoader: true,
+                data: {type: type, name:name},
+                success: function (res) {
+                    alert({
+                        title: $.mage.__('Content'),
+                        content: res.result,
+                        actions: {
+                            always: function(){
+                                console.log(res.result);
+                            }
+
+                        }
+                    });
+
+                },
+                error: function () {
+                    console.log("error");
+                }
+            })
+        });
+    })
+    ;
+</script>

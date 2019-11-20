@@ -1,0 +1,27 @@
+<?php
+
+$blockObj = $block->getLayout()->createBlock('Magenest\Staff\Block\PriceLevel');
+$om = \Magento\Framework\App\ObjectManager::getInstance();
+$price_arr = explode('-', $block->getPriceId());
+foreach ($price_arr as $item) {
+    if (is_numeric($item)) {
+        $pid = $item;
+        break;
+    }
+}
+$product = $om->get('Magento\Catalog\Model\ProductFactory')->create()->load($pid);
+$priceHelper = $om->create('Magento\Framework\Pricing\Helper\Data'); ?>
+<span class="price-container <?= /* @escapeNotVerified */
+$block->getAdjustmentCssClasses() ?>"
+	<?= $block->getSchema() ? ' itemprop="offers" itemscope itemtype="http://schema.org/Offer"' : '' ?>>
+<?php if ($block->getDisplayLabel()): ?>
+    <span class="price-label"><?= /* @escapeNotVerified */
+        $block->getDisplayLabel() ?></span>
+<?php endif; ?>
+    <strong><?php $finalprice = $product->getFinalPrice(); ?></strong>
+	<span class="price-label">
+<h4>
+<b><?php echo $priceHelper->currency($finalprice, true, false).$blockObj->getType(); ?></b>
+</h4>
+</span>
+</span>

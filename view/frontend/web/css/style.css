@@ -1,0 +1,8 @@
+button.save_staff{
+    background-color: blue;
+    color: white;
+}
+button.save_staff:hover{
+    background-color: #0f5293;
+    color: white;
+}

@@ -1,0 +1,24 @@
+<input type="text" id="text" placeholder="Search Staff ...">
+<button type="button" class="search_staff" id="search">Search</button>
+<p id="result" name="result"></p>
+
+<script>
+    require(['jquery'],function ($) {
+        $(document).on('click','#search',function () {
+            var content = $('#text').val();
+            $.ajax({
+                type: "POST",
+                url: "<?= $block->getBaseUrl().'manage/staff/ajaxSearch';?>",
+                showLoader: true,
+                data: {content:content},
+                success:function (res) {
+                    console.log(res.result);
+                    $("#result").text(res.result.toString());
+                },
+                error:function () {
+                    console.log('error');
+                }
+            });
+        })
+    });
+</script>

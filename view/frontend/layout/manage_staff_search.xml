@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <title>Search Staff</title>
+    </head>
+    <body>
+        <!-- Compare and wishlist sidebar -->
+        <referenceBlock name="catalog.compare.sidebar" remove="true"/>
+        <referenceBlock name="wishlist_sidebar" remove="true" />
+        <!-- Recently order -->
+        <referenceBlock name="sale.reorder.sidebar" remove="true" />
+        <!-- additional sidebar block -->
+        <referenceContainer name="sidebar.additional" remove="true" />
+        <referenceContainer name="content">
+            <block name="search" template="Magenest_Staff::search.phtml">
+            </block>
+        </referenceContainer>
+    </body>
+</page>
