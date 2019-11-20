@@ -30,9 +30,14 @@ class PriceLevel extends \Magento\Framework\View\Element\Template
         if ($customerId){
             $staff = $this->_staffFactory->create()->load($customerId,'customer_id');
             $type = $staff->getType();
-            if ($type == 1)
-                $result = '(lv1)';
-            else $result = '(lv2)';
+            if ($type){
+                if ($type == 1)
+                    $result = '(lv1)';
+                elseif($type == 2)
+                    $result = '(lv2)';
+                else
+                    $result = '';
+            }
         }
         return $result;
     }

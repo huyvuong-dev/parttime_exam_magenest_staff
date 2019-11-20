@@ -54,6 +54,7 @@ class Update extends \Magento\Framework\App\Action\Action
             $this->customerRepository->save($customer);
             //Save table
             $staffTable = $this->staff->create()->load($customerId,'customer_id');
+            $staffTable->setCustomerId($customerId);
             $staffTable->setType($type);
             $staffTable->setNickName($name);
             $staffTable->save();
