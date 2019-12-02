@@ -31,7 +31,7 @@ class AjaxSearch extends \Magento\Framework\App\Action\Action
         $resultPage = $this->resultFactory->create(\Magento\Framework\Controller\ResultFactory::TYPE_JSON);
         $content = $this->getRequest()->getParam('content');
         $output = [];
-        $names = $this->staffCollection->create()->addFieldToSelect('*')->addFieldToFilter('nick_name',array('like' => '%'.$content.'%'));
+        $names = $this->staffCollection->create()->addFieldToFilter('nick_name',array('like' => '%'.$content.'%'));
         foreach ($names as $name) {
             $output[] = $name['nick_name'];
         }
